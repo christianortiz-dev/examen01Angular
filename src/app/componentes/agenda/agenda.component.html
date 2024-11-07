@@ -1,0 +1,8 @@
+<div class="row my-3">
+  <div class="col-7">
+    <app-lista (mensajeEvento)="recibirContacto($event)"></app-lista>
+  </div>
+  <div class="col-5">
+    <app-detalle [valor]="contacto"></app-detalle>
+  </div>
+</div>

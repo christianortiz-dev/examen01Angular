@@ -1,0 +1,65 @@
+<div class="row border border-success p-3 rounded-5">
+  <div class="col-12">
+    <h3 class="text-success">LISTA DE CONTACTOS</h3>
+    <hr>
+    <button class="btn btn-sm mb-3 rounded-5 {{verFormulario?'btn-danger':'btn-success'}}" (click)="mostrarFormulario()"><i class="{{verFormulario?'bi bi-x-square':'bi bi-plus-square'}}"></i>{{ verFormulario?" Cancelar":" Nuevo"}}</button>
+    <ol class="list-group">
+      @for (contacto of contactos; track contacto.id) {
+      <a href="#"
+        class="list-group-item d-flex list-group-item-action justify-content-between align-items-start rounded-5 bg-success-subtle border border-success mt-1"
+        (click)="enviarContacto(contacto)">
+        <div class="ms-2 me-auto">
+          <h5 class="text-success-emphasis fw-bold">{{contacto.nombre}} {{contacto.apellidos}}</h5>
+          <p class="text-success-emphasis">id: {{contacto.id}}</p>
+        </div>
+        <div class="my-auto">
+          <img src="https://robohash.org/{{contacto.nombre}}{{contacto.apellidos}}?set=set5" alt="Imagen" width="50px"
+            class="img-fluid">
+          <button class="btn btn-outline-primary btn-sm ms-2" (click)="seleccionar(contacto)"><i
+              class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-outline-danger btn-sm ms-2" (click)="borrar(contacto.id)"><i
+              class="bi bi-trash"></i></button>
+        </div>
+      </a>
+      }
+    </ol>
+  </div>
+  <div class="col-12 p-5">
+    @if (verFormulario) {
+    <h3 class="text-success">FORMULARIO DE CONTACTOS</h3>
+    <hr>
+    <form>
+      <div class="my-3">
+        <label class="form-label">ID</label>
+        <input type="number" class="form-control" name="id" [(ngModel)]="contacto.id" disabled>
+      </div>
+      <div class="my-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="contacto.nombre">
+      </div>
+      <div class="my-3">
+        <label class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" [(ngModel)]="contacto.apellidos">
+      </div>
+      <div class="my-3">
+        <label class="form-label">Direccion</label>
+        <input type="text" class="form-control" name="direccion" [(ngModel)]="contacto.direccion">
+      </div>
+      <div class="my-3">
+        <label class="form-label">E-mail</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="contacto.email">
+      </div>
+      <div class="my-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" name="tlf" [(ngModel)]="contacto.tlf">
+      </div>
+      <button class="btn btn-success mx-1 rounded-5" (click)="agregar()"><i class="bi bi-person-plus"></i>
+        Insertar</button>
+      <button class="btn btn-primary mx-1 rounded-5" (click)="modificar()"><i class="bi bi-person-up"></i>
+        Modificar</button>
+      <button class="btn btn-danger mx-1 rounded-5" (click)="mostrarFormulario()"><i class="bi bi-x-square"></i>
+        Cancelar</button>
+
+    </form>
+    }
+  </div>
